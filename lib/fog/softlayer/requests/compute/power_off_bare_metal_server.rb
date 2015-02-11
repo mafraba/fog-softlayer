@@ -15,7 +15,7 @@ module Fog
       class Real
 
         def power_off_bare_metal_server(id)
-          request(:virtual_guest, "#{id.to_s}/powerOff", :http_method => :GET)
+          request(:hardware_server, "#{id.to_s}/powerOff", :http_method => :GET)
         end
 
       end

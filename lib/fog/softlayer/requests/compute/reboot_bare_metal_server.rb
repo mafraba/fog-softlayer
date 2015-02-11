@@ -16,9 +16,9 @@ module Fog
 
         def reboot_bare_metal_server(id, use_hard_reboot)
           if use_hard_reboot
-            request(:virtual_guest, "#{id.to_s}/rebootHard", :http_method => :GET)
+            request(:hardware_server, "#{id.to_s}/rebootHard", :http_method => :GET)
           else
-            request(:virtual_guest, "#{id.to_s}/rebootSoft", :http_method => :GET)
+            request(:hardware_server, "#{id.to_s}/rebootSoft", :http_method => :GET)
           end
         end
 
