@@ -8,7 +8,19 @@ module Fog
         # @param [Integer] id
         # @return [Excon::Response]
         def reboot_vm(id, use_hard_reboot)
-          # TODO: implement
+          response = Excon::Response.new
+          response.status = 200
+          found = self.get_vms.body.map{|server| server['id']}.include?(id)
+          if not found
+            response.status = 404
+            response.body = {
+              "error" => "Unable to find object with id of '#{id}'.",
+              "code" => "SoftLayer_Exception_ObjectNotFound"
+            }
+          else
+            response.body = true
+          end
+          response
         end
       end
 

@@ -259,12 +259,12 @@ module Fog
         end
 
         def reboot(use_hard_reboot = true)
-          requires :identity
           if bare_metal?
             service.reboot_bare_metal_server(id, use_hard_reboot)
           else
             service.reboot_vm(id, use_hard_reboot)
           end
+          true
         end
 
         def ssh_password
@@ -279,32 +279,32 @@ module Fog
         end
 
         def start
-          requires :identity
           if bare_metal?
             service.power_on_bare_metal_server(id)
           else
             service.power_on_vm(id)
           end
+          true
         end
 
         # Hard power off
         def stop
-          requires :identity
           if bare_metal?
             service.power_off_bare_metal_server(id)
           else
             service.power_off_vm(id, true)
           end
+          true
         end
 
         # Soft power off
         def shutdown
-          requires :identity
           if bare_metal?
             raise Fog::Errors::Error.new('Shutdown not supported on baremetal servers. Use #stop.')
           else
             service.power_off_vm(id, false)
           end
+          true
         end
 
         def state
